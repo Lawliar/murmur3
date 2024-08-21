@@ -21,7 +21,7 @@ def murmur32_128(number,seed,mapsize):
     _embhash.MurmurHash3_x86_128(key,len,seed,output)
     
     return 
-def murmur32_32(number,seed, mapsize):
+def murmur32_32(number,seed):
     global _embhash
     
     c_int32_p_ty = ctypes.POINTER(ctypes.c_int32)
@@ -37,6 +37,7 @@ def murmur32_32(number,seed, mapsize):
     output = ctypes.cast(ctypes.addressof(wrapped_output), c_int32_p_ty)
 
     _embhash.MurmurHash3_x86_32(key,len,seed,output)
-    return 
+
+    return output.contents.value
 if __name__ == '__main__':
     print(murmur32_128(344,0x12331234,32))
